@@ -284,12 +284,14 @@ function buildappimage() {
     if [[ -z "$APP_VERSION" ]] || [[ "$APP_VERSION" = "null" ]]; then
         APP_VERSION="$(date +'%F')"
     fi
-    curl -sL "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -o "$HOME"/.cache/deb2appimage/appimagetool || d2aexit 3 "appimagetool"
+    curl -sL "https://github.com/AppImage/AppImageKit/releases/download/12/appimagetool-x86_64.AppImage" -o "$HOME"/.cache/deb2appimage/appimagetool || d2aexit 3 "appimagetool"
+    curl -sL "https://github.com/AppImage/AppImageKit/releases/download/12/runtime-armhf" -o "$HOME"/.cache/deb2appimage/AppRun-armhf
     chmod +x "$HOME"/.cache/deb2appimage/appimagetool
+    bash
     if [[ "$D2A_QUIET" = "TRUE" ]]; then
-        ARCH="$(uname -m)" "$HOME"/.cache/deb2appimage/appimagetool "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"$(uname -m)".AppImage > /dev/null 2>&1 || d2aexit 6 "$APP_NAME"
+        ARCH="armhf" "$HOME"/.cache/deb2appimage/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage > /dev/null 2>&1 || d2aexit 6 "$APP_NAME"
     else
-        ARCH="$(uname -m)" "$HOME"/.cache/deb2appimage/appimagetool "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"$(uname -m)".AppImage || d2aexit 6 "$APP_NAME"
+        ARCH="armhf" "$HOME"/.cache/deb2appimage/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage || d2aexit 6 "$APP_NAME"
     fi
 }
 
