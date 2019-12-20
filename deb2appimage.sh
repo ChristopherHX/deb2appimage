@@ -290,11 +290,15 @@ function buildappimage() {
     "$HOME"/.cache/deb2appimage/appimagetool.Appimage --appimage-extract
     echo "Extracted"
     curl -sL "https://github.com/AppImage/AppImageKit/releases/download/12/runtime-armhf" -o "$HOME"/.cache/deb2appimage/AppRun-armhf
-    if [[ "$D2A_QUIET" = "TRUE" ]]; then
-        ARCH=armhf squashfs-root/usr/bin/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage > /dev/null 2>&1 || d2aexit 6 "$APP_NAME"
-    else
-        ARCH=armhf squashfs-root/usr/bin/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage || d2aexit 6 "$APP_NAME"
-    fi
+    # if [[ "$D2A_QUIET" = "TRUE" ]]; then
+    #     ARCH=armhf squashfs-root/usr/bin/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage > /dev/null 2>&1 || d2aexit 6 "$APP_NAME"
+    # else
+    #     ARCH=armhf squashfs-root/usr/bin/appimagetool --runtime-file "$HOME"/.cache/deb2appimage/AppRun-armhf "$@" "$HOME"/.cache/deb2appimage/AppDir "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage || d2aexit 6 "$APP_NAME"
+    # fi
+    mksquashfs "$HOME"/.cache/deb2appimage/AppDir mc.squashfs -root-owned -noappend
+    cat "$HOME"/.cache/deb2appimage/AppRun-armhf > "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage
+    cat mc.squashfs >> "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage
+    chmod a+x "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage
 }
 
 function d2ahelp() {
