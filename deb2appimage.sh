@@ -298,7 +298,7 @@ function buildappimage() {
     # fi
     find "$HOME"/.cache/deb2appimage/AppDir/usr/bin/ -maxdepth 1 | xargs -n 1 patchelf --set-rpath /lib/:/lib/arm-linux-gnueabihf/:/usr/lib/:/usr/lib/arm-linux-gnueabihf/:\$ORIGIN/../lib/arm-linux-gnueabihf/
     find "$HOME"/.cache/deb2appimage/AppDir/usr/lib/arm-linux-gnueabihf/ -maxdepth 1 -name *.so* | xargs -n 1 patchelf --set-rpath \$ORIGIN
-    rm -rf "$HOME"/.cache/deb2appimage/AppDir/lib "$HOME"/.cache/deb2appimage/AppDir/var "$HOME"/.cache/deb2appimage/AppDir/control.tar.xz "$HOME"/.cache/deb2appimage/AppDir/etc "$HOME"/.cache/deb2appimage/AppDir/usr/sbin "$HOME"/.cache/deb2appimage/AppDir/usr/share
+    rm -rf "$HOME"/.cache/deb2appimage/AppDir/lib "$HOME"/.cache/deb2appimage/AppDir/var "$HOME"/.cache/deb2appimage/AppDir/control.tar.xz "$HOME"/.cache/deb2appimage/AppDir/etc "$HOME"/.cache/deb2appimage/AppDir/usr/sbin
     mksquashfs "$HOME"/.cache/deb2appimage/AppDir mc.squashfs -root-owned -noappend
     cat "$HOME"/.cache/deb2appimage/AppRun-armhf > "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage
     cat mc.squashfs >> "$D2A_OUTPUT"/"$APP_NAME"-"$APP_VERSION"-"armhf".AppImage
