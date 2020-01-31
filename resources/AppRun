@@ -22,14 +22,14 @@ RUNNING_DIR="$(dirname "$REALPATH")"
 
 # Set AppRun environment variables based on config settings
 [ "$APPRUN_SET_PATH" = "TRUE" ] && export PATH="$RUNNING_DIR"/usr/bin/:"$RUNNING_DIR"/usr/sbin/:"$RUNNING_DIR"/usr/games/:"$RUNNING_DIR"/bin/:"$RUNNING_DIR"/sbin/:"$PATH"
-[ "$APPRUN_SET_LD_LIBRARY_PATH" = "TRUE" ] && export LD_LIBRARY_PATH="$RUNNING_DIR"/usr/lib/:"$RUNNING_DIR"/usr/lib/i386-linux-gnu/:"$RUNNING_DIR"/usr/lib/x86_64-linux-gnu/:"$RUNNING_DIR"/usr/lib32/:"$RUNNING_DIR"/usr/lib64/:"$RUNNING_DIR"/lib/:"$RUNNING_DIR"/lib/i386-linux-gnu/:"$RUNNING_DIR"/lib/x86_64-linux-gnu/:"$RUNNING_DIR"/lib32/:"$RUNNING_DIR"/lib64/:"${LD_LIBRARY_PATH}"
+[ "$APPRUN_SET_LD_LIBRARY_PATH" = "TRUE" ] && export LD_LIBRARY_PATH="$RUNNING_DIR"/usr/lib/:"$RUNNING_DIR"/usr/lib/arm-linux-gnueabihf/:"$RUNNING_DIR"/lib/:"$RUNNING_DIR"/lib/arm-linux-gnueabihf/:"${LD_LIBRARY_PATH}"
 [ "$APPRUN_SET_PYTHONPATH" = "TRUE" ] && export PYTHONPATH="$RUNNING_DIR"/usr/share/pyshared/:"$PYTHONPATH"
 [ "$APPRUN_SET_PYTHONHOME" = "TRUE" ] && export PYTHONHOME="$RUNNING_DIR"/usr/:"$PYTHONHOME"
 [ "$APPRUN_SET_PYTHONDONTWRITEBYTECODE" = "TRUE" ] && export PYTHONDONTWRITEBYTECODE=1
 [ "$APPRUN_SET_XDG_DATA_DIRS" = "TRUE" ] && export XDG_DATA_DIRS="$RUNNING_DIR"/usr/share/:"$XDG_DATA_DIRS"
 [ "$APPRUN_SET_PERLLIB" = "TRUE" ] && export PERLLIB="$RUNNING_DIR"/usr/share/perl5/:"$RUNNING_DIR"/usr/lib/perl5/:"$PERLLIB"
 [ "$APPRUN_SET_GSETTINGS_SCHEMA_DIR" = "TRUE" ] && export GSETTINGS_SCHEMA_DIR="$RUNNING_DIR"/usr/share/glib-2.0/schemas/:"$GSETTINGS_SCHEMA_DIR"
-[ "$APPRUN_SET_QT_PLUGIN_PATH" = "TRUE" ] && export QT_PLUGIN_PATH="$RUNNING_DIR"/usr/lib/qt4/plugins/:"$RUNNING_DIR"/usr/lib/i386-linux-gnu/qt4/plugins/:"$RUNNING_DIR"/usr/lib/x86_64-linux-gnu/qt4/plugins/:"$RUNNING_DIR"/usr/lib32/qt4/plugins/:"$RUNNING_DIR"/usr/lib64/qt4/plugins/:"$RUNNING_DIR"/usr/lib/qt5/plugins/:"$RUNNING_DIR"/usr/lib/i386-linux-gnu/qt5/plugins/:"$RUNNING_DIR"/usr/lib/x86_64-linux-gnu/qt5/plugins/:"$RUNNING_DIR"/usr/lib32/qt5/plugins/:"$RUNNING_DIR"/usr/lib64/qt5/plugins/:"$QT_PLUGIN_PATH"
+[ "$APPRUN_SET_QT_PLUGIN_PATH" = "TRUE" ] && export QT_PLUGIN_PATH="$RUNNING_DIR"/usr/lib/qt5/plugins/:"$RUNNING_DIR"/usr/lib/arm-linux-gnueabihf/qt5/plugins/:"$QT_PLUGIN_PATH"
 
 # Use APPRUN_EXEC variable if it is set otherwise attempt to find .desktop file and Exec line from .desktop file in RUNNING_DIR
 if [ -z "$APPRUN_EXEC" ]; then
